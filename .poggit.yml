@@ -1,0 +1,9 @@
+--- 
+build-by-default: true
+branches:
+- main
+projects:
+  SkywarsGui:
+    path: ""
+    icon: ""
+...
