@@ -1,6 +1,6 @@
 <?php
 
-namespace Gui\TheBlast;
+namespace TheBlast\SWGUI;
 
 use muqsit\invmenu\InvMenu;
 use muqsit\invmenu\InvMenuHandler;
