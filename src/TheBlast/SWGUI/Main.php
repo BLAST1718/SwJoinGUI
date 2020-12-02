@@ -22,7 +22,7 @@ class Main extends PluginBase{
 		}
 		$command = new PluginCommand("swgui", $this);
 		$command->setDescription("SwGui command");
-		$this->getServer()->getCommandMap()->register("sw", $command);
+		$this->getServer()->getCommandMap()->register("swgui", $command);
 	}
 
 	public function onDisable(){
@@ -33,7 +33,7 @@ class Main extends PluginBase{
 		switch($cmd->getName()){
 			case "swgui":
 				if(!$player instanceof Player){
-					$player->sendMessage("Youve been transfered");
+					$player->sendMessage("You have joined the game");
 					return true;
 				}
 				$this->tgui($player);
