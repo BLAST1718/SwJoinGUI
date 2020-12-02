@@ -1,1 +1,8 @@
-
+name: SkywarsGui
+main: TheBlast\SWGUI\Main
+author: TheBlast
+version: 1.0.0
+api: 3.0.0
+command:
+ swgui:
+  description: opens sw join gui
