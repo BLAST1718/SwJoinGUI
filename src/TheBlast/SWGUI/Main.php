@@ -22,7 +22,7 @@ class Main extends PluginBase{
 		}
 		$command = new PluginCommand("swgui", $this);
 		$command->setDescription("SwGui command");
-		$this->getServer()->getCommandMap()->register("swgui", $command);
+		$this->getServer()->getCommandMap()->register("sw", $command);
 	}
 
 	public function onDisable(){
@@ -33,10 +33,10 @@ class Main extends PluginBase{
 		switch($cmd->getName()){
 			case "swgui":
 				if(!$player instanceof Player){
-					$player->sendMessage("You have joined the game");
+					$player->sendMessage("Youve been transfered");
 					return true;
 				}
-				$this->tgui($player);
+				$this->swgui($player);
 				break;
 		}
 		return true;
@@ -49,27 +49,35 @@ class Main extends PluginBase{
 		$menu->setName("Skywars Games");
 		$menu->send($player);
 		$inv = $menu->getInventory();
-		$feather = Item::get(Item::FEATHER)->setCustomName("Graveyard");
-		$stone = Item::get(Item::STONE)->setCustomName("Coven");
-		$inv->setItem(1, $feather);
-		$inv->setItem(2, $stone);
+        $grass = Item::get(Item::GRASS)->setCustomName(" Sw Solo");
+        $feather = Item::get(Item::FEATHER)->setCustomName(" Sw Duos");
+		$stone = Item::get(Item::STONE)->setCustomName("Sw Random");
+		$inv->setItem(9, $grass);
+		$inv->setItem(11, $feather);
+        $inv->setItem(13, $stone);
 	}
 
 	public function GUIListener(InvMenuTransaction $action) : InvMenuTransactionResult{
 		$itemClicked = $action->getOut();
 		$player = $action->getPlayer();
 		if($itemClicked->getId() == 288){
-            $action->getAction()->getInventory()->onClose($player);
-            $player->sendMessage("Skywars");
-            \pocketmine\Server::getInstance()->dispatchCommand($player, "say no gamemodes available yet");
-            return $action->discard();
-}
-		if($itemClicked->getId() == 1){
-            $action->getAction()->getInventory()->onClose($player);
-            $player->sendMessage("Skywars");
-            \pocketmine\Server::getInstance()->dispatchCommand($player, "sw join Graveyard");
-            return $action->discard();
-}
+			$action->getAction()->getInventory()->onClose($player);
+			$player->sendMessage("Skywars");
+			\pocketmine\Server::getInstance()->dispatchCommand($player, "swduo");
+			return $action->discard();
+		}
+		if($itemClicked->getId() == 2){
+			$action->getAction()->getInventory()->onClose($player);
+			$player->sendMessage("Skywars");
+			\pocketmine\Server::getInstance()->dispatchCommand($player, "swsolo");
+			return $action->discard();
+		}
+        if($itemClicked->getId() == 1){
+			$action->getAction()->getInventory()->onClose($player);
+			$player->sendMessage("Skywars");
+			\pocketmine\Server::getInstance()->dispatchCommand($player, "sw random");
+			return $action->discard();
+		}
 		return $action->discard();
 	}
 }
